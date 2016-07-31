@@ -3,7 +3,6 @@ project(cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES
-    DMCpp/hello42.cpp)
+set(SOURCE_FILES)
 
-add_executable(cpp ${SOURCE_FILES})
+add_executable(cpp ${SOURCE_FILES} DMCpp/basicTypes.cpp)
