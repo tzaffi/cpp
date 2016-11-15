@@ -17,6 +17,8 @@ int main()
             std::ofstream fout;
             fout.open(FILENAME);
             fout << age;
+            //explict version not necessary because out of scope:
+            //fout.close();
             success = true;
         } catch (int e) {
             std::cout << "Woops: " << e << std::endl;

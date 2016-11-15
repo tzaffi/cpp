@@ -3,6 +3,23 @@
 //
 #include <iostream>
 
+template<typename num>
+void fillFibArray(size_t N, num* fib){
+    int pos = 0;
+    if (pos >= N) return;
+    fib[pos++] = 0;
+    if (pos >= N) return;
+    fib[pos++] = 1;
+    for(; pos < N; fib[pos] = fib[pos-2] + fib[pos-1], ++pos);
+}
+
+template<typename num>
+void printFiArray(size_t N, num* fib){
+    for(int i=0; i<N; i++){
+        std::cout << "f_" << i << " = " << fib[i] << std::endl;
+    }
+}
+
 int main(){
     using namespace std;
     cout << "PART 1: Pointer Stuff" << endl << endl;
@@ -52,7 +69,43 @@ int main(){
          << "http://c-faq.com/decl/spiral.anderson.html" << endl;
 
     cout << endl << endl << "PART 2: On the stack and heap / valgrind" << endl << endl;
+    const unsigned long fibSize = 100;
 
+    cout << "A " << fibSize << " Fibonacci's on the stack";
+    unsigned long fibStack[fibSize];
+    fillFibArray(fibSize, fibStack);
+    printFiArray(fibSize, fibStack);
+
+    cout << "How big an array?" << endl << "> ";
+    unsigned long fibSize2;
+    cin >> fibSize2;
+    unsigned long *fibHeap = new unsigned long[fibSize2];
+    fillFibArray(fibSize2, fibHeap);
+    printFiArray(fibSize2, fibHeap);
+    delete[] fibHeap;
+
+
+    cout << "How big an array to re-allocate?" << endl << "> ";
+    cin >> fibSize2;
+    fibHeap = new unsigned long[fibSize2];
+    fillFibArray(fibSize2, fibHeap);
+    printFiArray(fibSize2, fibHeap);
+    cout << "OOOOOPS!!!! forgot to delete[] !!!" << endl;
+    cout << "Please run the command" << endl << "valgrind --tool=memcheck ./arraysAndPointers "
+         << "to UNDERSTAND BETTER WHY." << endl << endl;
+    //delete[] fibHeap;
+/*
+ * Valgrind's report (the relevant portion assuming fibsize2 = 100)
+ *
+==62157== LEAK SUMMARY:
+==62157==    definitely lost: 800 bytes in 1 blocks
+==62157==    indirectly lost: 0 bytes in 0 blocks
+==62157==      possibly lost: 2,064 bytes in 1 blocks
+==62157==    still reachable: 8,192 bytes in 2 blocks
+==62157==         suppressed: 20,102 bytes in 188 blocks
+==62157== Rerun with --leak-check=full to see details of leaked memory
+ *
+ */
 
     return 0;
 }

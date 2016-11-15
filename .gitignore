@@ -2,3 +2,6 @@
 *.out
 aws-sdk-cpp/
 *.idea
+gnuBuild/
+io_work/
+why2awsSDKdirectories
