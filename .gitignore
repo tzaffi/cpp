@@ -1,2 +1,4 @@
 *~
 *.out
+aws-sdk-cpp/
+*.idea
