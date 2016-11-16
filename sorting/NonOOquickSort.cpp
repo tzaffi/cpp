@@ -14,10 +14,26 @@
  *      QuickSort(A[i,k))
  *      QuickSort(A[k+1,j))
  *
+ * // Partition will work by
+ * // * Placing pivot in left-most position i
+ * // LOOP INVARIANT:
+ * // * Any item between i+1 and left is in the left partition (strictly less than pivot)
+ * // * Any item between left and right is in the right partition (greater or equal to pivot)
+ * // (NOTE: A[left] is unknown, this is just a place-holder)
+ * // At each step increment right and re-commit to  LOOP INVARIANT by:
+ * //    * If A[right-1] >= pivot ... there's nothing to do and we're done
+ * //    * ELSE: swap A[left] <---> A[right] and increment left <--- left+1 thus reinsuring loop invariant
+ * // Since everything to the left
  * Partition( A[i,j) ):
- *      pivot = A[Random[i,j)]
- *      left = i, right = j-1
- *      while(true):
+ *      pivotIdx = Random[i,j)
+ *      pivot = A[pivotIdx]
+ *      swap(A[i], A[pivotIdx])
+ *      left = i
+ *      for right = i+1 to j:
+ *          //enter with LOOP INVARIANT IN PLACE
+ *          if (A[right] < pivot)
+ *              swap(A[left], A[right])
+ *              left = left+1
  *          while(A[left] < pivot and left < right)
  *              left = left + 1
  *          while(A[right] >= pivot and left < right)
