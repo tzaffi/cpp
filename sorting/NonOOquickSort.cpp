@@ -35,7 +35,7 @@
  *
  * To maintain the loop invariant at each step:
  *      swap(A[left], A[right])
- *      while(A[right] > pivot) right++
+ *      while(A[right] >= pivot) right++
  *      left++
  *
  * ALTOGETHER:
@@ -47,25 +47,24 @@
  *      swap(A[i], A[pivotIdx])
  *      pivot = A[i]
  *      left = i+1, right = left+1
- *      while(left < k and A[left] < pivot) left++
+ *      while(left < j and A[left] < pivot) left++
  *      right = left + 1
- *      while(right < k and A[right] >= pivot) right++
- *
+ *      while(right < j and A[right] >= pivot) right++
+ *   
+ *      // what if right >= j?
+ *      // then either left == j in which case A[i+1,j) > pivot
+ *      // or left < j in which case we're also done...
+ *      if right >= j:
+ *          swap(A[i], A[left-1])
+ *          return left-1
  *      //NOW PROCEED WITH THE INDUCTIVE STEPS:
- *      swap(A[i], A[pivotIdx])
- *      left = i
- *      for right = i+1 to j:
- *          //enter with LOOP INVARIANT IN PLACE
- *          if (A[right] < pivot)
- *              swap(A[left], A[right])
- *              left = left+1
- *          while(A[left] < pivot and left < right)
- *              left = left + 1
- *          while(A[right] >= pivot and left < right)
- *              right = right -1
- *          if(left >= right) break
- *          swap(A[left], A[right]
- *      return left
+ *      while(true)
+ *          swap(A[left], A[right])
+ *          while(right < j and A[right] >= pivot) right++
+ *          left++
+ *          if right >= j:
+ *              swap(A[i], A[left-1])
+ *              return left-1
  */
 #include <iostream>
 #include <memory>
