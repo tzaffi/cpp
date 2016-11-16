@@ -17,16 +17,41 @@
  * // Partition will work by
  * // * Placing pivot in left-most position i
  * // LOOP INVARIANT:
- * // * Any item between i+1 and left is in the left partition (strictly less than pivot)
- * // * Any item between left and right is in the right partition (greater or equal to pivot)
- * // (NOTE: A[left] is unknown, this is just a place-holder)
- * // At each step increment right and re-commit to  LOOP INVARIANT by:
- * //    * If A[right-1] >= pivot ... there's nothing to do and we're done
- * //    * ELSE: swap A[left] <---> A[right] and increment left <--- left+1 thus reinsuring loop invariant
- * // Since everything to the left
+ * // o   A[i] == pivot
+ * // o   A[i+1,left) < pivot or is EMPTY
+ * // o   A[left,right) >= pivot or is EMPTY
+ * 
+ * The algorithm stops when right == j. At that point the loop invariant guarantees
+ * that the entire set -excluding the pivot- is partitioned. and we simply need
+ * to exchange(A[i], A[left-1]).
+ *
+ * To obtain the loop invariant at the beginning we:
+ * set: left = i+1
+ *      while(A[left] < pivot) left++
+ *      right = left + 1
+ *      while(A[right] >= pivot) right++
+ *
+ * (NOTE: in the case that A[i+1] >= pivot we'll get left = i+1, and right > left)
+ *
+ * To maintain the loop invariant at each step:
+ *      swap(A[left], A[right])
+ *      while(A[right] > pivot) right++
+ *      left++
+ *
+ * ALTOGETHER:
+ *
  * Partition( A[i,j) ):
+ *      if j-i <= 1 return i (at most 1 element, so return the only relevant index)
+ *
  *      pivotIdx = Random[i,j)
- *      pivot = A[pivotIdx]
+ *      swap(A[i], A[pivotIdx])
+ *      pivot = A[i]
+ *      left = i+1, right = left+1
+ *      while(left < k and A[left] < pivot) left++
+ *      right = left + 1
+ *      while(right < k and A[right] >= pivot) right++
+ *
+ *      //NOW PROCEED WITH THE INDUCTIVE STEPS:
  *      swap(A[i], A[pivotIdx])
  *      left = i
  *      for right = i+1 to j:
