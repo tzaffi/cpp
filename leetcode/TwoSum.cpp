@@ -39,7 +39,7 @@ using namespace std;
 typedef pair<unsigned int, unsigned int> indexPair;
 
 template<typename T>
-indexPair TwoSum(vector<T> nums, T target) {
+indexPair TwoSum(const vector<T>& nums, const T& target) {
     size_t L = nums.size();
     for(unsigned i=0; i<L-1; i++){
         T currTarget = target - nums[i];
