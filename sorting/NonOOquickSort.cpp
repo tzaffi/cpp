@@ -89,10 +89,10 @@ void swap(T& x, T&y)
     y = tmp;
 }
 
-std::unique_ptr<unsigned []> makeRandomArray(size_t N)
+std::unique_ptr<size_t []> makeRandomArray(size_t N)
 {
-    std::unique_ptr<unsigned []> result{new unsigned[N]};
-    for(unsigned i=0; i<N; i++){
+    std::unique_ptr<size_t []> result{new size_t[N]};
+    for(size_t i=0; i<N; i++){
         result[i] = rand() % N;
     }
     return result;
@@ -187,7 +187,7 @@ void testPartition(unsigned maxSize, unsigned iterationsPerSize)
     {
         for(unsigned j=0; j<iterationsPerSize; j++)
         {
-            std::unique_ptr<unsigned []> x = makeRandomArray(i);
+            std::unique_ptr<size_t []> x = makeRandomArray(i);
             unsigned pivotIndex = partition(x.get(), 0, i);
             assertIsPartitioned(x.get(), pivotIndex, 0, i);
         }
@@ -210,7 +210,7 @@ void testQuickSort(unsigned maxSize, unsigned iterationsPerSize)
     {
         for(unsigned j=0; j<iterationsPerSize; j++)
         {
-            std::unique_ptr<unsigned []> x = makeRandomArray(i);
+            std::unique_ptr<size_t []> x = makeRandomArray(i);
             QuickSort(x.get(), 0, i);
             assertIsSorted(x.get(), 0, i);
         }
@@ -223,7 +223,7 @@ void testQuickSort(unsigned maxSize, unsigned iterationsPerSize)
               << duration << "seconds" << std::endl;
 }
 int main(){
-    std::srand(std::time(0));
+    std::srand((unsigned int)std::time(0));
 
     int A[] = {1, 2, 3, 4};
     prettyPrint(A, 0, 4);
@@ -231,7 +231,7 @@ int main(){
     swap(A[0], A[3]);
     prettyPrint(A, 0, 4);
 
-    std::unique_ptr<unsigned []> x = makeRandomArray(13);
+    std::unique_ptr<size_t []> x = makeRandomArray(13);
     partition(x.get(), 0, 13, true);
 
     testPartition(100, 100);
@@ -240,5 +240,7 @@ int main(){
     QuickSort(x.get(), 0, 20, true);
 
     testQuickSort(100, 100);
-    testQuickSort(10000, 1);
+    testQuickSort(1000, 1);
+
+    return 0;
 }
