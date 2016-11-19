@@ -27,3 +27,29 @@ template<typename T>
 void Printer<T>::prettyPrint(const std::pair<T, T> &P) {
     std:: cout << "<" << P.first << ", " << P.second << ">";
 }
+
+//template<typename iter>
+//void hmmm (iter cbegin, iter cend) {
+//    unsigned pos=0;
+//    for(iter it= cbegin; it!= cend; ++it, ++pos){
+//        std::cout << pos << ": " << *it << '\t';
+//    }
+//}
+
+
+template<typename T>
+void Printer<T>::prettyPrint(const std::set<T> &S)
+{
+    unsigned pos=0;
+    for(auto it= S.cbegin(); it!= S.cend(); ++it, ++pos){
+        std::cout << pos << ": " << *it << '\t';
+    }
+}
+
+template<typename T>
+void Printer<T>::prettyPrint(const std::multiset<T> &M) {
+    unsigned pos=0;
+    for(auto it= M.cbegin(); it!= M.cend(); ++it, ++pos){
+        std::cout << pos << ": " << *it << '\t';
+    }
+}

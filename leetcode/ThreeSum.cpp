@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cassert>
 #include <vector>
+#include <set>
 #include "../helpers/Printer.cpp"
 
 /***
@@ -27,7 +28,7 @@ A solution set is:
 ]
 ```
 
-At this point, it is probably no easier to solve 3-sum than solving N-sum.
+At this point, it is probably no easier to solve  N-sum than solving 3-sum specificially.
 
 P(S, N, s):
 
@@ -55,7 +56,7 @@ T(|S|, N) = |S| * T(|S|-1, N-1)
 So if the running time is measured in terms of n = |S| with k = number of summands,
 this is O(n^k) - which is polynomial time in n with degree k- the number of summands.
 ****/
-//----- MODIFY EVERYTHIG BELOW HERE:
+//----- MODIFY EVERYTHING BELOW HERE:
 /**
  * Input:
  *   nums - T array of summable
@@ -98,28 +99,48 @@ indexPair runExample(const vector<T> &nums, T target) {
 
 int main()
 {
-    vector<int> nums = {2, 7, 11, 15};
-    int target = 9;
+    set<int> S{1,4,3,1,2, -7};
+    cout << "S.size() = "  << S.size() << endl;
+    cout << "S = ";
+    Printer<int>::prettyPrint(S);
+    cout << endl;
 
-    indexPair solution = runExample(nums, target);
-    assert(solution.first == 0);
-    assert(solution.second == 1);
+    multiset<int> t1{1,2,3}, t2{1, 2, 2}, t3{1, 2, 3};
+    cout << "t1.size() = "  << t1.size() << endl;
+    cout << "t2.size() = "  << t2.size() << endl;
+    cout << "t1 = ";
+    Printer<int>::prettyPrint(t1);
+    cout << endl;
+    cout << "t2 = ";
+    Printer<int>::prettyPrint(t2);
+    cout << endl;
+    cout << "t1 <= t1 = " << boolalpha << (t1 <= t1) << endl;
+    cout << "t1 < t2 = " << boolalpha << (t1 < t2) << endl;
+    cout << "t2 < t1 = " << boolalpha << (t2 < t1) << endl;
+    cout << "t1 == t3 = " << boolalpha << (t1 == t3) << endl;
 
-    nums = {1,2,3,4,5,6,7,8,9,10};
-    target = 11;
-    solution = runExample(nums, target);
-    assert(solution.first == 0);
-    assert(solution.second == 9);
-
-    target = 14;
-    solution = runExample(nums, target);
-    assert(solution.first == 3);
-    assert(solution.second == 9);
-
-    target = -5;
-    solution = runExample(nums, target);
-    assert(solution.first == 0);
-    assert(solution.second == 0);
+//    vector<int> nums = {2, 7, 11, 15};
+//    int target = 9;
+//
+//    indexPair solution = runExample(nums, target);
+//    assert(solution.first == 0);
+//    assert(solution.second == 1);
+//
+//    nums = {1,2,3,4,5,6,7,8,9,10};
+//    target = 11;
+//    solution = runExample(nums, target);
+//    assert(solution.first == 0);
+//    assert(solution.second == 9);
+//
+//    target = 14;
+//    solution = runExample(nums, target);
+//    assert(solution.first == 3);
+//    assert(solution.second == 9);
+//
+//    target = -5;
+//    solution = runExample(nums, target);
+//    assert(solution.first == 0);
+//    assert(solution.second == 0);
 
     return 0;
 }

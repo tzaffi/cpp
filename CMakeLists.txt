@@ -14,3 +14,5 @@ add_executable(arraysAndPointers ${SOURCE_FILES} DMCpp/1_10_2_ArraysAndPointers.
 add_executable(NonOOquickSort sorting/NonOOquickSort.cpp)
 
 add_executable(TwoSum leetcode/TwoSum.cpp ${SOURCE_FILES})
+
+add_executable(ThreeSum leetcode/ThreeSum.cpp ${SOURCE_FILES})
