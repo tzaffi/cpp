@@ -1,7 +1,7 @@
 *~
 *.out
 aws-sdk-cpp/
-*.idea
+.idea/
 gnuBuild/
 io_work/
 build/
