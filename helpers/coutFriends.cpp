@@ -15,9 +15,10 @@ std::ostream& containerOstreamer(std::ostream& os, const containerType& v)
    size_t pos = 0;
    for (auto ii = v.begin(); ii != v.end(); ++ii, ++pos)
    {
-       std::string suffix = (pos == v.size()-1 ? "]" : ",\t");
+       std::string suffix = (pos == v.size()-1 ? "" : ",\t");
        os << pos << ": " << *ii << suffix;
    }
+   os << "]";
    return os;
 }
 
