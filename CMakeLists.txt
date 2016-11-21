@@ -3,7 +3,7 @@ project(cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES helpers/Printer.h helpers/Printer.cpp)
+set(SOURCE_FILES helpers/Printer.h helpers/Printer.cpp helpers/coutFriends.h helpers/coutFriends.cpp)
 
 add_executable(basicTypes ${SOURCE_FILES} DMCpp/basicTypes.cpp)
 

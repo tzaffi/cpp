@@ -7,6 +7,7 @@
 #include <vector>
 #include <set>
 #include "../helpers/Printer.cpp"
+#include "../helpers/coutFriends.cpp"
 
 /***
 From: https://leetcode.com/problems/3sum/
@@ -71,54 +72,46 @@ this is O(n^k) - which is polynomial time in n with degree k- the number of summ
 using namespace std;
 typedef pair<unsigned int, unsigned int> indexPair;
 
-template<typename T>
-indexPair TwoSum(const vector<T>& nums, const T& target) {
-    size_t L = nums.size();
-    for(unsigned i=0; i<L-1; i++){
-        T currTarget = target - nums[i];
-        for(unsigned j=i+1; j<L; j++){
-            if(nums[j] == currTarget)
-                return indexPair(i, j);
-        }
-    }
-    return indexPair(0,0);
-}
+void stdSetTest ();
+void stdMultisetTest ();
+void setOfMultisetTest ();
 
-template <typename T>
-indexPair runExample(const vector<T> &nums, T target) {
-    cout << "Given: nums = ";
-    Printer<T>::prettyPrint(nums);
-    cout << "\t\t target = " << target << endl;
+void testCase0();
 
-    auto solution = TwoSum(nums, target);
-    cout << "Solution = ";
-    Printer<T>::prettyPrint(solution);
-    cout << endl;
-    return solution;
-}
+//template<typename T>
+//indexPair TwoSum(const vector<T>& nums, const T& target) {
+//    size_t L = nums.size();
+//    for(unsigned i=0; i<L-1; i++){
+//        T currTarget = target - nums[i];
+//        for(unsigned j=i+1; j<L; j++){
+//            if(nums[j] == currTarget)
+//                return indexPair(i, j);
+//        }
+//    }
+//    return indexPair(0,0);
+//}
+//
+//template <typename T>
+//indexPair runExample(const vector<T> &nums, T target) {
+//    cout << "Given: nums = ";
+//    Printer<T>::prettyPrint(nums);
+//    cout << "\t\t target = " << target << endl;
+//
+//    auto solution = TwoSum(nums, target);
+//    cout << "Solution = ";
+//    Printer<T>::prettyPrint(solution);
+//    cout << endl;
+//    return solution;
+//}
 
 int main()
 {
-    set<int> S{1,4,3,1,2, -7};
-    cout << "S.size() = "  << S.size() << endl;
-    cout << "S = ";
-    Printer<int>::prettyPrint(S);
-    cout << endl;
+    stdSetTest();
+    stdMultisetTest();
+    setOfMultisetTest();
 
-    multiset<int> t1{1,2,3}, t2{1, 2, 2}, t3{1, 2, 3};
-    cout << "t1.size() = "  << t1.size() << endl;
-    cout << "t2.size() = "  << t2.size() << endl;
-    cout << "t1 = ";
-    Printer<int>::prettyPrint(t1);
-    cout << endl;
-    cout << "t2 = ";
-    Printer<int>::prettyPrint(t2);
-    cout << endl;
-    cout << "t1 <= t1 = " << boolalpha << (t1 <= t1) << endl;
-    cout << "t1 < t2 = " << boolalpha << (t1 < t2) << endl;
-    cout << "t2 < t1 = " << boolalpha << (t2 < t1) << endl;
-    cout << "t1 == t3 = " << boolalpha << (t1 == t3) << endl;
-//test
+    testCase0();
+
 //    vector<int> nums = {2, 7, 11, 15};
 //    int target = 9;
 //
@@ -143,4 +136,51 @@ int main()
 //    assert(solution.second == 0);
 
     return 0;
+}
+
+void stdMultisetTest () {
+    multiset<int> t1{1, 2, 3}, t2{1, 2, 2}, t3{1, 2, 3};
+    cout << "t1.size() = "  << t1.size() << endl;
+    cout << "t2.size() = "  << t2.size() << endl;
+    cout << "t1 = ";
+    Printer<int>::prettyPrint(t1);
+//    cout << "t1 = " << t1 << endl;
+    cout << endl;
+    cout << "t2 = ";
+    Printer<int>::prettyPrint(t2);
+    cout << endl;
+    cout << "t1 <= t1 = " << boolalpha << (t1 <= t1) << endl;
+    cout << "t1 < t2 = " << boolalpha << (t1 < t2) << endl;
+    cout << "t2 < t1 = " << boolalpha << (t2 < t1) << endl;
+    cout << "t1 == t3 = " << boolalpha << (t1 == t3) << endl;
+}
+
+void stdSetTest () {
+    set<int> S{1, 4, 3, 1, 2, -7};
+    cout << "S.size() = "  << S.size() << endl;
+    cout << "S = ";
+    Printer<int>::prettyPrint(S);
+    cout << endl;
+}
+
+void setOfMultisetTest () {
+    set<multiset<int>> empty{{}};
+}
+
+
+void testCase0(){
+    set<int> S{-1, 3, 4, 5, -5};
+    int targetSolution = 0, targetNoSolution = 4;
+    unsigned N = 0;
+
+    cout << "For S = ";
+    Printer<int>::prettyPrint(S);
+    cout << " and target = " << targetSolution << endl;
+    cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
+
+
+    cout << "Vector: " << vector<int>{1,2,3,4,5};
+    cout << "Set: " << set<int>{1,2,3,4,5};
+//    set<multiset<int>> solution = NSum(N, S, targetSolution);
+//    assert(solution ==  set<multiset<int>>{{}};
 }
