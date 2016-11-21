@@ -179,8 +179,9 @@ void testCase0(){
     cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
 
 
-    cout << "Vector: " << vector<int>{1,2,3,4,5};
-    cout << "Set: " << set<int>{1,2,3,4,5};
+    cout << "Vector: " << endl << vector<int>{1,2,3,4,5} << endl;
+    cout << "Set: " << endl << set<int>{1,2,3,4,5,-3,-2,-1,0,1,2,3} << endl;
+    cout << "Multiset: " << endl << multiset<int>{1,2,3,4,5,-3,-2,-1,0,1,2,3} << endl;
 //    set<multiset<int>> solution = NSum(N, S, targetSolution);
 //    assert(solution ==  set<multiset<int>>{{}};
 }

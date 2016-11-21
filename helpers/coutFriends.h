@@ -7,12 +7,15 @@
 
 #include <ostream>
 #include <vector>
+#include <set>
 
+template <typename T>
+std::ostream& operator << (std::ostream& os, const std::vector<T>& v);
 
-//template <typename T>
-//std::ostream& operator << (std::ostream& os, const std::vector<T>& v);
+template <typename T>
+std::ostream& operator << (std::ostream& os, const std::set<T>& s);
 
-template <typename T, template<typename ELEM, typename ALLOC=std::allocator<ELEM> > class Container>
-std::ostream& operator<< (std::ostream& o, const Container<T>& container);
+template <typename T>
+std::ostream& operator << (std::ostream& os, const std::multiset<T>& ms);
 
 #endif //CPP_COUTFRIENDS_H

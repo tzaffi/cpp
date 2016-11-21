@@ -6,31 +6,36 @@
 
 #include <ostream>
 #include <vector>
+#include <set>
 
-//template<typename T>
-//std::ostream &operator<< (std::ostream &os , const std::vector<T> &v) {
-//    os << "[";
-//    size_t pos = 0;
-//    for (typename std::vector<T>::const_iterator ii = v.begin(); ii != v.end(); ++ii, ++pos)
-//    {
-//        std::string suffix = (pos == v.size()-1 ? "]" : ",\t");
-//        os << pos << ": " << *ii << suffix;
-//    }
-//    return os;
-//}
+template<typename containerType>
+std::ostream& containerOstreamer(std::ostream& os, const containerType& v)
+{
+   os << "[";
+   size_t pos = 0;
+   for (auto ii = v.begin(); ii != v.end(); ++ii, ++pos)
+   {
+       std::string suffix = (pos == v.size()-1 ? "]" : ",\t");
+       os << pos << ": " << *ii << suffix;
+   }
+   return os;
+}
 
-template<typename T , template<typename ELEM , typename ALLOC=std::allocator<ELEM> > class Container>
-std::ostream &operator<< (std::ostream &o , const Container<T>& container) {
-    typename Container<T>::const_iterator ii = container.begin();
-    o << "["; // 1
-    size_t pos = 0;
-    while(ii != container.end())
-    {
-        std::string suffix = (pos == container.size()-1 ? "]" : ",\t");
-        o << pos << ": " << *ii << suffix;
-        ++ii;
-        ++pos;
-    }
-    o << " ]"; // 3
-    return o;
+template<typename T>
+std::ostream &operator<< (std::ostream &os, const std::vector<T> &v)
+{
+  return containerOstreamer<std::vector<T>>(os, v);
+}
+
+
+template<typename T>
+std::ostream &operator<< (std::ostream &os, const std::set<T> &s)
+{
+  return containerOstreamer<std::set<T>>(os, s);
+}
+
+template<typename T>
+std::ostream &operator<< (std::ostream &os, const std::multiset<T> &ms)
+{
+  return containerOstreamer<std::multiset<T>>(os, ms);
 }
