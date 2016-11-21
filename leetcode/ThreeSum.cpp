@@ -6,6 +6,9 @@
 #include <cassert>
 #include <vector>
 #include <set>
+
+#include <exception>
+
 #include "../helpers/coutFriends.cpp"
 
 /***
@@ -109,7 +112,7 @@ template<typename T>
 set<multiset<T>> NSum(vector<T> V, const size_t& N, const T& target){
   if (N == 0)
     return target == 0 ? set<multiset<T>>{{}} :  set<multiset<T>>{};
-  throw "NOT YET IMPLEMENTED";
+  throw runtime_error("NOT YET IMPLEMENTED");
 }
 
 int main()
@@ -190,9 +193,11 @@ void testCase0(){
     cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
     cout << NSum(V, N, targetSolution) << endl;
 
-
+    V = vector<int>{2, 7, 11, 15};
+    N = 2;
+    int target = 9;
     cout << "For V = " << endl << V << endl;
-    cout << " and target = " << targetNoSolution << endl;
+    cout << " and target = " << target << endl;
     cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
     cout << NSum(V, N, targetNoSolution) << endl;
 }
