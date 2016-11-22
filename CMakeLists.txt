@@ -16,3 +16,5 @@ add_executable(NonOOquickSort sorting/NonOOquickSort.cpp)
 add_executable(TwoSum leetcode/TwoSum.cpp ${SOURCE_FILES})
 
 add_executable(ThreeSum leetcode/ThreeSum.cpp ${SOURCE_FILES})
+
+add_executable(IsCompleteCycle GTraining/IsCompleteCycle.cpp ${SOURCE_FILES})

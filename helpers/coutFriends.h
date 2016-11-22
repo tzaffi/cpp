@@ -18,4 +18,7 @@ std::ostream& operator << (std::ostream& os, const std::set<T>& s);
 template <typename T>
 std::ostream& operator << (std::ostream& os, const std::multiset<T>& ms);
 
+template <typename S, typename T>
+std::ostream& operator << (std::ostream& os, const std::pair<S, T>& p);
+
 #endif //CPP_COUTFRIENDS_H

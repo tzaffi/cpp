@@ -40,3 +40,10 @@ std::ostream &operator<< (std::ostream &os, const std::multiset<T> &ms)
 {
   return containerOstreamer<std::multiset<T>>(os, ms);
 }
+
+template <typename S, typename T>
+std::ostream& operator << (std::ostream& os, const std::pair<S, T>& p)
+{
+   os << "<" << p.first << ", " << p.second << ">";
+   return os;
+}

@@ -6,7 +6,6 @@
 #include <cassert>
 #include <vector>
 #include <set>
-
 #include <exception>
 
 #include "../helpers/coutFriends.cpp"
