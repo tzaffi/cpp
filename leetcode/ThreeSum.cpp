@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <vector>
 #include <set>
+#include <string>
+#include <exception>
 
 #include "../helpers/coutFriends.cpp"
 
@@ -48,7 +50,7 @@ N-1 => N:
     T = T U {i} X P(V-{i}, N-1, s-i)  // Note that when P(V-{i}, N-1, s-i) is empty, we just skip all processing
 
 Run time analysis: 
-VTEP N-1 => N:
+STEP N-1 => N:
 T(|V|, N) = |V| * T(|V|-1, N-1)
           = |V| * |V-1| * T(|V| - 2, N-2)
 .... assuming N < |V|...
@@ -76,10 +78,13 @@ void stdSetTest ();
 void stdMultisetTest ();
 void setOfMultisetTest();
 
-void directoProductTest();
+void directProductTest();
+void unionTest();
 
 void testCase0();
 void testCase1();
+void testCase2();
+void testCase3();
 
 template<typename T>
 set<multiset<T>> directProduct(const T &lhs, const set<multiset<T>> &rhs)
@@ -96,13 +101,38 @@ set<multiset<T>> directProduct(const T &lhs, const set<multiset<T>> &rhs)
 }
 
 template<typename T>
+set<multiset<T>> operator* (const T &lhs, const set<multiset<T>> &rhs){
+  return directProduct(lhs, rhs);
+}
+
+template<typename M>
+set<M> operator+ (const set<M>& lhs, const set<M>& rhs){
+  set<M> U{lhs};
+  U.insert(rhs.cbegin(), rhs.cend());
+  return U;
+}
+
+template<typename T>
 set<multiset<T>> NSum(vector<T> V, const size_t& N, const T& target)
 {
     if (N == 0)
     {
         return target == 0 ? set<multiset<T>>{{}} : set<multiset<T>>{};
     }
-
+    set<multiset<T>> solutions;
+    for(size_t i=0; i<V.size(); i++){
+      T curr = V[i];
+      vector<T> V_minus_curr(V.begin(), V.begin() + i);
+      V_minus_curr.insert(V_minus_curr.end(), V.begin() + i + 1, V.end());
+      //cout << "Evaluate NSum(V, N, target) = " << endl;
+      //cout << "NSum( " << V_minus_curr << " ,\n" << N-1 << " ,\n" << target-curr << "\n) = " << endl;
+      auto subcaseSolutions = NSum(V_minus_curr, N-1, target-curr);
+      if(subcaseSolutions.size()) {
+        solutions = solutions + (curr * subcaseSolutions);
+      }
+    }
+    return solutions;
+    throw runtime_error("Case N = " + to_string(N) + " not yet implement");
 }
 
 
@@ -113,10 +143,13 @@ int main()
     stdMultisetTest();
     setOfMultisetTest();
 
-    directoProductTest();
-
+    directProductTest();
+    unionTest();
+    
     testCase0();
     testCase1();
+    testCase2();
+    testCase3();
 
     return 0;
 }
@@ -157,12 +190,23 @@ void setOfMultisetTest () {
     cout << "interesting = " << endl << interesting << endl;
 }
 
-void directoProductTest()
+void directProductTest()
 {
-    cout << "directoProductTest():" << endl;
+    cout << "directProductTest():" << endl;
     set<multiset<int>> interesting{{1, 2, 0, 1}, {}, {5,4,3,2,1}};
-    cout << "5 X interesting = " << endl << 5 << " X " << interesting << endl;
+    cout << "directProduct(5,interesting) = " << endl << 5 << " X " << interesting << endl;
     cout << " = " << endl << directProduct(5, interesting) << endl << endl;
+    cout << "2 * interesting = " << endl << 2 << " X " << interesting << endl;
+    cout << " = " << endl << 2 * interesting << endl << endl;
+}
+
+void unionTest()
+{
+    cout << "unionTest():" << endl;
+    set<int> A{1, 3, 5, 7};
+    set<int> B{5, 6, 7, 8, 9};
+    cout << A << " + " << B << " = " << endl;
+    cout << A+B << endl << endl;
 }
 
 void testCase0(){
@@ -186,8 +230,57 @@ void testCase1 ()
 {
     cout << "testCase1():" << endl;
     vector<int> V{2, 7, 11, 15};
+    size_t N = 1;
+    int target = 9;
+    cout << "For V = " << endl << V << endl;
+    cout << " and target = " << target << endl;
+    cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
+    cout << NSum(V, N, target) << endl;
+
+    target = 11;
+    cout << "For V = " << endl << V << endl;
+    cout << " and target = " << target << endl;
+    cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
+    cout << NSum(V, N, target) << endl;
+}
+
+void testCase2 ()
+{
+    cout << "testCase2():" << endl;
+    vector<int> V{2, 7, 11, -2, 15};
     size_t N = 2;
     int target = 9;
+    cout << "For V = " << endl << V << endl;
+    cout << " and target = " << target << endl;
+    cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
+    cout << NSum(V, N, target) << endl;
+
+    target = 40;
+    cout << "For V = " << endl << V << endl;
+    cout << " and target = " << target << endl;
+    cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
+    cout << NSum(V, N, target) << endl;
+}
+
+void testCase3 ()
+{
+    cout << "testCase2():" << endl;
+    vector<int> V{2, 7, 11, -2, 15};
+    size_t N = 3;
+    int target = 9;
+    cout << "For V = " << endl << V << endl;
+    cout << " and target = " << target << endl;
+    cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
+    cout << NSum(V, N, target) << endl;
+
+    target = 40;
+    cout << "For V = " << endl << V << endl;
+    cout << " and target = " << target << endl;
+    cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
+    cout << NSum(V, N, target) << endl;
+
+    V = {-1, 0, 1, 2, -1, -4};
+    target = 0;
     cout << "For V = " << endl << V << endl;
     cout << " and target = " << target << endl;
     cout << "the set of all " << N << "-tuples that sum to target is:" << endl;
