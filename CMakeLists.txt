@@ -20,3 +20,5 @@ add_executable(ThreeSum leetcode/ThreeSum.cpp ${SOURCE_FILES})
 add_executable(IsCompleteCycle GTraining/IsCompleteCycle.cpp ${SOURCE_FILES})
 
 add_executable(Dust2Dust ${SOURCE_FILES} DMCpp/p93_EnvironmentDeleter.cpp)
+
+add_executable(inorderBT ${SOURCE_FILES} leetcode/inorderBinaryTree.cpp)
