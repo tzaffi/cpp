@@ -12,6 +12,9 @@ class polynomial {
 public:
     polynomial(const unsigned& degree);
     polynomial(const std::vector<double>& coeffs);
+    polynomial(const polynomial&) = default;
+    polynomial& operator=(const polynomial& rhs) = default;
+    polynomial& operator=(polynomial&& rhs);
     ~polynomial ();
     const unsigned& degree() const;
     void assignCoefficients(const std::vector<double>& coeffs);

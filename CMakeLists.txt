@@ -24,3 +24,5 @@ add_executable(Dust2Dust ${SOURCE_FILES} DMCpp/p93_EnvironmentDeleter.cpp)
 add_executable(inorderBT ${SOURCE_FILES} leetcode/inorderBinaryTree.cpp)
 
 add_executable(polynomial DMCpp/Polynomial_2_8.h DMCpp/Polynomial_2_8.cpp)
+
+add_executable(ruleOf6 misc/RuleOfSix.cpp)

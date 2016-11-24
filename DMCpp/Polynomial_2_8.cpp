@@ -14,9 +14,19 @@ polynomial::polynomial(const unsigned& degree) : D(degree), m_coeffs(D+1, 0.0) {
 
 //TODO: complaints about possible negative
 polynomial::polynomial (const std::vector<double> &coeffs) :
-        D(coeffs.size()-1), m_coeffs(coeffs)
-{
+        D(coeffs.size()-1), m_coeffs(coeffs) { }
 
+polynomial &polynomial::operator= (polynomial &&rhs) {
+    D = move(rhs.D);
+    m_coeffs = move(rhs.m_coeffs);
+    rhs.D = 0;
+    rhs.m_coeffs =  vector<double>();
+    return *this;
+}
+
+polynomial f(double c2, double c1, double c0){
+    polynomial P({c0, c1, c2});
+    return P;
 }
 
 const unsigned& polynomial::degree() const { return D;}
@@ -36,6 +46,10 @@ double polynomial::getCoefficient (unsigned i) const {
 }
 
 ostream &operator<< (ostream &os, const polynomial &P) {
+    if(P.D==0){
+        os << "NULL";
+        return os;
+    }
     for(size_t i=0; i<=P.D; ++i) {
         string prefix(""), suffix("");
         if(i > 0){
@@ -82,6 +96,8 @@ int main(){
     polynomial unclear3(vector<double>{4.0});
     cout << "unclear3 = " << endl << unclear3 << endl;
 
+    unclear2 = f(100, 50, 25);
+    cout << unclear2 << endl;
     return 0;
 }
 
