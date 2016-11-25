@@ -26,3 +26,9 @@ add_executable(inorderBT ${SOURCE_FILES} leetcode/inorderBinaryTree.cpp)
 add_executable(polynomial DMCpp/Polynomial_2_8.h DMCpp/Polynomial_2_8.cpp)
 
 add_executable(ruleOf6 misc/RuleOfSix.cpp)
+
+add_executable(wiggle leetcode/WiggleSubsequence.cpp)
+
+add_executable(countBits leetcode/CountingBits.cpp)
+
+add_executable(reverseLL leetcode/LinkedListReverse.cpp)
