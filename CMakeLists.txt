@@ -32,3 +32,13 @@ add_executable(wiggle leetcode/WiggleSubsequence.cpp)
 add_executable(countBits leetcode/CountingBits.cpp)
 
 add_executable(reverseLL leetcode/LinkedListReverse.cpp)
+
+add_executable(setZeroMatrix leetcode/SetZeroMatrix.cpp)
+
+add_executable(burstBalloons ${SOURCE_FILES} leetcode/BurstBalloons.cpp)
+
+#giving up:
+#file(GLOB SDL_SRC "/Users/zeph/SDL/include/*.h" "/Users/zeph/SDL/src/*.h" "/Users/zeph/SDL/src/*.cpp")
+add_executable(map_test ${SDL_SRC} DMCpp/GottschlingRepo/c++11/map_test.cpp)
+
+add_executable(map_vs_unordered ${SOURCE_FILES} GTraining/Map_v_UnorderedMap.cpp)
