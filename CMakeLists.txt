@@ -42,3 +42,15 @@ add_executable(burstBalloons ${SOURCE_FILES} leetcode/BurstBalloons.cpp)
 add_executable(map_test ${SDL_SRC} DMCpp/GottschlingRepo/c++11/map_test.cpp)
 
 add_executable(map_vs_unordered ${SOURCE_FILES} GTraining/Map_v_UnorderedMap.cpp)
+
+add_executable(comboSum leetcode/ComboSumIV.cpp)
+
+add_executable(MSS leetcode/MaxSubArray.cpp)
+
+add_executable(missingNumber leetcode/MissingNumber.cpp)
+
+add_executable(removeElemlent ${SOURCE_FILES} leetcode/RemoveElement.cpp)
+
+add_executable(mergeLL leetcode/MergeLL.cpp)
+
+add_executable(mergeSortedLists ${SOURCE_FILES} leetcode/MergeLists.cpp)
