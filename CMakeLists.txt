@@ -3,7 +3,7 @@ project(cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES helpers/Printer.h helpers/Printer.cpp helpers/coutFriends.h helpers/coutFriends.cpp)
+set(SOURCE_FILES helpers/DataStructures.h helpers/DataStructures.cpp helpers/Printer.h helpers/Printer.cpp helpers/coutFriends.h helpers/coutFriends.cpp)
 
 add_executable(basicTypes ${SOURCE_FILES} DMCpp/basicTypes.cpp)
 
@@ -57,4 +57,6 @@ add_executable(mergeLL leetcode/MergeLL.cpp)
 
 add_executable(mergeSortedLists ${SOURCE_FILES} leetcode/MergeLists.cpp)
 
-add_executable(LFU ${SOURCE_FILES} leetcode/LFU.cpp)
+add_executable(LFU helpers/DataStructures.h helpers/DataStructures.cpp leetcode/LFU.cpp)
+
+add_executable(heap helpers/DataStructures.h helpers/DataStructures.cpp misc/DummyMain.cpp)

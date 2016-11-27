@@ -15,6 +15,9 @@ And this [2010 O(1) Algorithm](http://dhruvbird.com/lfu.pdf)
 #include <chrono>
 #include <cassert>
 
+#include "../helpers/DataStructures.h"
+#include "../helpers/DataStructures.cpp"
+
 using namespace std;
 using namespace std::chrono;
 
@@ -98,6 +101,7 @@ public:
                 auto discard = cache.top();
                 cout << "Max capacity reached. Size = " << size() << " Discarded:\n" << discard << endl;
                 cache.pop();
+                values.erase(discard.key);
             }
             cache.emplace(key,val);
             values[key] = val;
@@ -118,6 +122,7 @@ private:
         pqType newCache;
         while(!cache.empty()){
             auto node = cache.top();
+            cache.pop();
             if (node.key == key){
                 node.tick();
             }
@@ -159,11 +164,7 @@ void pqTest(){
     cout << "typeid(whatKindOfDurationAmI).name():" << typeid(whatKindOfDurationAmI).name() << endl;
 }
 
-int main(){
-    cout << "LFU Experimentation\n\n";
-    pqTest();
-
-    LFU_STL<string, int> stl(5, INT_MIN);
+void runLFUtest(LFU_Interface<string, int>& stl) {
     assert(stl.capacity == 5);
     assert(stl.get("DNE") == INT_MIN);
     cout << "stl.get(\"DNE\") = " << stl.get("DNE") << endl;
@@ -184,6 +185,21 @@ int main(){
     }
     stl.set("fourteen", 14);
     assert(stl.get("two") == stl.NOT_FOUND);
+}
+
+void testArrayHeap(){
+    ArrayHeap<int,int> heap(5);
+}
+
+int main(){
+    cout << "LFU Experimentation\n\n";
+    pqTest();
+
+    LFU_STL<string, int> stl(5, INT_MIN);
+    runLFUtest(stl);
+
+    testArrayHeap();
 
     return 0;
 }
+
