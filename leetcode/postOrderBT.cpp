@@ -22,6 +22,7 @@ Note: Recursive solution is trivial, could you do it iteratively?
 
 #include <iostream>
 #include <vector>
+#include <utility>
 #include <cassert>
 #include <algorithm>
 #include <cmath>
@@ -41,10 +42,37 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+struct VisitableTreeNode : public TreeNode {
+    VisitableTreeNode(const TreeNode& node)
+            : TreeNode(node.val) {
+        this->left = node.left;
+        this->right = node.right
+    }
+    bool visited = false;
+};
+
+template <typename T>
+class Stack{
+public:
+    void push(T val){
+        v.push_back(val);
+    }
+    bool isEmpty(){
+        return v.size() == 0;
+    }
+    T&& pop(){
+        T res = move(v.back());
+        v.pop_back();
+        return move(res);
+    }
+private:
+    vector<T> v = {};
+};
+
 class Solution {
 public:
-    vector<int> postorderTraversal(TreeNode* root) {
-        return recursivePostorderTraversal(root);
+    vector<int> postorderTraversal(TreeNode* root, bool recursive = true) {
+        return (recursive ? recursivePostorderTraversal(root) : iterativePostorderTraversal(root));
     }
 private:
     vector<int> recursivePostorderTraversal(TreeNode* root) {
@@ -60,6 +88,28 @@ private:
         }
         ans.push_back(root->val);
         return ans;
+    }
+
+    vector<int> iterativePostorderTraversal (TreeNode *root) {
+        vector<int> v;
+        if(!root){
+            return v;
+        }
+        Stack<VisitableTreeNode*> s;
+        s.push(new VisitableTreeNode(*root));
+        while(!s.isEmpty()){
+            VisitableTreeNode* n = s.pop();
+            if(n->visited){
+                v.push_back(n->val);
+                delete n;
+            } else {
+                n->visited = true;
+                s.push(n);
+                if(n->right) { s.push(new VisitableTreeNode(*n->right)); }
+                if(n->left) { s.push(new VisitableTreeNode(*n->left)); }
+            }
+        }
+        return v;
     }
 
 public:
@@ -108,6 +158,36 @@ public:
     }
 };
 
+void testStack(){
+    Stack<string> s;
+    for(auto c: "hello mother"){
+        s.push(string(1,c));
+    }
+    cout << endl << endl;
+    while(!s.isEmpty()){
+        cout << s.pop();
+    }
+
+    Stack<int> s2;
+    for(int i=1; i<=10; ++i){
+        s2.push(i);
+    }
+    cout << endl << endl;
+    while(!s2.isEmpty()){
+        cout << s2.pop();
+    }
+    cout << endl << endl;
+}
+
+void testVisitableTreeNode() {
+    TreeNode tn1(15);
+    cout << "tn1[" << tn1.val << "] " << endl;
+    VisitableTreeNode vtn1(13);
+    cout << "vtn1[" << vtn1.val << "] visited = " <<  vtn1.visited << endl;
+    VisitableTreeNode vtn2(tn1);
+    cout << "vtn2[" << vtn2.val << "] visited = " <<  vtn2.visited << endl;
+};
+
 int main() {
     TreeNode one(1), three(3), two(2);
     one.right = &two;
@@ -140,4 +220,9 @@ SOLUTION: 3, 2, 7, 5, 6, 4, 1
     cout << "\n\nINORDER RECURSIVE:\n" << s.inorderTraversal(&a) << endl;
     cout << "\n\nINORDER ITERATIVE:\b" << s.nonRecursive(&a) << endl << endl;
     cout << "\n\nPOST-ORDER RECURSIVE:\b" << s.postorderTraversal(&a) << endl << endl;
+
+    testStack();
+    testVisitableTreeNode();
+
+    cout << "\n\nPOST-ORDER NON-RECURSIVE:\b" << s.postorderTraversal(&a, false) << endl << endl;
 }

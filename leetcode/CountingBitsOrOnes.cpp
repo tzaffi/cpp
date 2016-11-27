@@ -35,6 +35,21 @@ using namespace std;
 
 class Solution {
 public:
+    /*
+Given an integer n, count the total number of digit 1 appearing in all non-negative integers less than or equal to n.
+
+For example:
+Given n = 13,
+Return 6, because digit 1 occurred in the following numbers: 1, 10, 11, 12, 13.
+     */
+    int countDigitOne(int n) {
+        if(n < 10){
+            return (n > 0 ? 1: 0);
+        }
+        int powerOf10Floor = pow(10, (int)log10(n));
+        int residual = (n+1-powerOf10Floor >= powerOf10Floor ? powerOf10Floor : n+1-powerOf10Floor);
+        return residual + (n/powerOf10Floor) * countDigitOne(powerOf10Floor-1) + countDigitOne(n % powerOf10Floor);
+    }
     vector<int> countBits(int num) {
         if(num == 0) {
             return vector<int>{0};
@@ -53,5 +68,8 @@ int main() {
 
     Solution s;
     assert(s.countBits(5) == vector<int>({0,1,1,2,1,2}));
+
+    assert(s.countDigitOne(13) == 6);
+
     return 0;
 }

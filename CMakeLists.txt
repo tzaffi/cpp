@@ -23,13 +23,15 @@ add_executable(Dust2Dust ${SOURCE_FILES} DMCpp/p93_EnvironmentDeleter.cpp)
 
 add_executable(inorderBT ${SOURCE_FILES} leetcode/inorderBinaryTree.cpp)
 
+add_executable(postorderBT ${SOURCE_FILES} leetcode/postOrderBT.cpp)
+
 add_executable(polynomial DMCpp/Polynomial_2_8.h DMCpp/Polynomial_2_8.cpp)
 
 add_executable(ruleOf6 misc/RuleOfSix.cpp)
 
 add_executable(wiggle leetcode/WiggleSubsequence.cpp)
 
-add_executable(countBits leetcode/CountingBits.cpp)
+add_executable(countBits leetcode/CountingBitsOrOnes.cpp)
 
 add_executable(reverseLL leetcode/LinkedListReverse.cpp)
 
@@ -54,3 +56,5 @@ add_executable(removeElemlent ${SOURCE_FILES} leetcode/RemoveElement.cpp)
 add_executable(mergeLL leetcode/MergeLL.cpp)
 
 add_executable(mergeSortedLists ${SOURCE_FILES} leetcode/MergeLists.cpp)
+
+add_executable(LFU ${SOURCE_FILES} leetcode/LFU.cpp)
