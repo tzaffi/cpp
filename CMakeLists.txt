@@ -45,7 +45,7 @@ add_executable(map_test ${SDL_SRC} DMCpp/GottschlingRepo/c++11/map_test.cpp)
 
 add_executable(map_vs_unordered ${SOURCE_FILES} GTraining/Map_v_UnorderedMap.cpp)
 
-add_executable(comboSum leetcode/ComboSumIV.cpp)
+add_executable(comboSum helpers/coutFriends.cpp helpers/coutFriends.h leetcode/ComboSumIV.cpp)
 
 add_executable(MSS leetcode/MaxSubArray.cpp)
 
@@ -60,3 +60,7 @@ add_executable(mergeSortedLists ${SOURCE_FILES} leetcode/MergeLists.cpp)
 add_executable(LFU helpers/DataStructures.h helpers/DataStructures.cpp leetcode/LFU.cpp)
 
 add_executable(heap helpers/DataStructures.h helpers/DataStructures.cpp misc/DummyMain.cpp)
+
+add_executable(LFU2 leetcode/LFU_submitted.cpp)
+
+add_executable(singleNum leetcode/SIngleNumber.cpp)
