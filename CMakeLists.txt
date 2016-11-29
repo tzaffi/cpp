@@ -64,3 +64,9 @@ add_executable(heap helpers/DataStructures.h helpers/DataStructures.cpp misc/Dum
 add_executable(LFU2 leetcode/LFU_submitted.cpp)
 
 add_executable(singleNum leetcode/SIngleNumber.cpp)
+
+add_executable(dummy misc/DummyMain.cpp)
+
+add_executable(streamingMedian leetcode/StreamingMedian.cpp)
+
+add_executable(LongestPath leetcode/LongestFilePath.cpp)
