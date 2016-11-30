@@ -56,23 +56,35 @@ using namespace std;
 class Solution {
 public:
     int lengthLongestPath(string input, int level=0) {
-        //what's the base case?
-        int ans = 0;
-        for(string subtree: getSubtrees(input, level)){
-            string root("");
-            unsigned i=level;
-            for(; i<subtree.size(); ++i){
-                char c = subtree[i];
-                if(c != '\n'){
-                    root += c;
-                } else { break; }
-            }
-            int longestInSubtree = root.size() + lengthLongestPath(subtree.substr(i+1),level+1);
-            ans = max(ans, longestInSubtree);
+        string splitter = "\n";
+        for(int i=0; i<level; i++){ splitter += '\t'; }
+        int tree1end = input.find(splitter);
+        while(tree1end != string::npos){
+            if(input[tree1end+level+1] != '\t'){ break; }
+            tree1end = input.find(splitter, tree1end+level+1);
         }
-        return ans;
+        int res;
+        if(tree1end == string::npos){
+            res = lengthLongestPathInTree(input, level);
+//            cout << "\nlongest in forest " << input << " is " << res;
+            return res;
+        }
+        res = max(lengthLongestPathInTree(input.substr(0,tree1end), level),
+                   lengthLongestPath(input.substr(tree1end+1), level));
+//        cout << "\nlongest in forest " << input << " is " << res;
+        return res;
     }
+
 private:
+    int lengthLongestPathInTree (string tree, int level) {
+        int rootEnd = tree.find('\n');
+        if (rootEnd == string::npos){
+            //if not a file, return 0!
+            return tree.find('.') != string::npos ? tree.size() - level : 0;
+        }
+        int subCase = lengthLongestPath(tree.substr(rootEnd+1),level+1);
+        return subCase ? rootEnd - level + 1 + subCase : subCase;
+    }
 };
 
 int main(){
@@ -80,6 +92,12 @@ int main(){
 
     Solution s;
     string pathString = "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext";
-    cout << "The longest path in \n" << pathString << "\n is\n " << s.lengthLongestPath(pathString);
+    cout << "\n\nThe longest path in \n" << pathString << "\n is\n " << s.lengthLongestPath(pathString);
+
+    pathString = "a";
+    cout << "\n\nThe longest path in \n" << pathString << "\n is\n " << s.lengthLongestPath(pathString);
+
+    pathString ="a\n\tb\n\t\tc";
+    cout << "\n\nThe longest path in \n" << pathString << "\n is\n " << s.lengthLongestPath(pathString);
     return 0;
 }

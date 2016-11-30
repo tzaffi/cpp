@@ -70,3 +70,5 @@ add_executable(dummy misc/DummyMain.cpp)
 add_executable(streamingMedian leetcode/StreamingMedian.cpp)
 
 add_executable(LongestPath leetcode/LongestFilePath.cpp)
+
+add_executable(regexp leetcode/SimpleRegularExpressions.cpp)
