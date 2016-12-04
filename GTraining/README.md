@@ -21,17 +21,75 @@ bool IsCompleteCycle(const std::vector<long>& cArray);
 
 ### Iterating through two sorted lists in *O*(*m+n*)
 
+* [SortedArrayIterator](./SortedArrayIterator.cpp)
+* [Merge Sort](./MergeSort.cpp)
+
 1. Write a function that takes two vectors (or arrays), and a function object 
 (and/or lambda and/or function pointer) and goes through the array
 applying the function and collecting it into an output vector. Do this in
 the most efficient manner.
 1. Generalize this to write an iterator that does the same
+1. Use this to implement merge sort
+1. **EC**: Generalize using variadic templates to multiple array merge.
 
-### Call a `protected` member from a super-clas
+### Call a `protected` member from a super-class
 
-### What happens when a constructor throws
+```$C++
+struct protectedHi {
+protected:
+    void hi() { cout << "Hello from <protectedHi>\n"; }
+}
+```
+
+### What happens when a constructor throws?
+E.g.
+```C++
+struct A{
+    A(){
+       cout << "Hello from A\n";
+       throw 1;
+    }
+    ~A(){ cout << "Goodbye from A\n"; }
+}
+struct B{
+    B(){ cout << "Hellow from B\n"; }
+    ~B(){ cout << "Goodbye from B\n"; }
+}
+struct C{
+    C() a = A(), b = B(){ cout << "Hellow from C\n"; }
+    ~C(){ cout << "Goodbye from C\n"; }
+private:
+    A a;
+    B b;
+}
+```
 
 ### Reference variable re-assignment
+What happens here:
+```C++
+int x = 1, y = 2;
+int& r = x; //there's supposed to be an ampersand after `int`... no sure why we don't see it
+r = 3;
+cout << x << y << r; 
+```
+
+### Review the *Big Six* functions that automatically get created for every class
+Which functions get created, what keywords do you use? (`default` ?`delete`?)
+
+### Review how to get a uniformly distributed double
+Is it something like:
+
+```C++
+double leftBound = -1.0, rightBound = 1.0;
+double r = rand(leftBound, rightBound)/
+```
+***???***
+
+And how do you provide a good random seed?
+
+* Write a program that is given a vector of weights, and a function
+`isReady()` which tells you whether a particular weight should be used,
+randomly chooses a weight in proportion to its size (if it's *ready*)
 
 ## Questions that come up as I'm doing this
 
@@ -42,3 +100,5 @@ with them (possibly with a template)?
 1. Figure out how to write an iterator in C++
 1. What is the difference between *closure* and *capture* for C++ lambdas?
 1. Do arrays have iterators in C++ 11? (there's the begin() and end())?
+1. Clarify how protected members get visibility in sub-classes.
+1. Clarify if `struct` subclasses act any differently from `class` sub-clasess.
