@@ -63,4 +63,20 @@ namespace Choosers{
         }
         return false;
     }
+
+    template <typename T>
+    bool insertLeftOrBothIfEqual (const T &left , const T &right , std::vector<T> &aggregator){
+        aggregator.push_back(left);
+        if(left == right){ aggregator.push_back(right); }
+        return true;
+    }
+
+    template <typename T>
+    bool insertLeftIfNewElement (const T &left , const T &right , std::vector<T> &aggregator){
+        auto lastInsertItr = aggregator.cend();
+        bool alreadyInserted = ( (lastInsertItr != aggregator.cbegin()) && (*(lastInsertItr-1) == left));
+        if(alreadyInserted){ return false; }
+        aggregator.push_back(left);
+        return true;
+    }
 }
