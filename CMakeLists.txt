@@ -78,3 +78,5 @@ add_executable(minMutations_aka_BFS leetcode/MinGeneticMutation_aka_BFS.cpp)
 add_executable(addNums leetcode/AddNumbersLL.cpp)
 
 add_executable(sortedArrayIterator GTraining/SortedArrayIterator.cpp GTraining/Main.cpp)
+
+add_executable(uniformDistribution GTraining/pickRandomElementFromSubset.cpp)

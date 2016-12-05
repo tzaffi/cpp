@@ -76,20 +76,45 @@ cout << x << y << r;
 ### Review the *Big Six* functions that automatically get created for every class
 Which functions get created, what keywords do you use? (`default` ?`delete`?)
 
+```C++
+obj()
+obj(const obj&)
+obj(obj&&)
+obj& operator= (const obj&)
+obj& operator= (obj&&)
+~obj()
+```
+Yes, use **delete** and **default**
+
 ### Review how to get a uniformly distributed double
 Is it something like:
 
-```C++
-double leftBound = -1.0, rightBound = 1.0;
-double r = rand(leftBound, rightBound)/
-```
-***???***
+~~double leftBound = -1.0, rightBound = 1.0;~~
+~~double r = rand(leftBound, rightBound);~~
+
 
 And how do you provide a good random seed?
+
+ANSWER:
+```C++
+unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+default_random_engine generator(seed);
+uniform_real_distribution<double> distribution(0.0, total);
+double rndNumber = distribution(generator);
+```
+In other words:
+
+1. Create a seed using a semi random process such as the current time or `random_device`
+1. Use it to seed a random generator engine
+1. Define a distribution (*independent of the generator*)
+1. Provide the generator as the distribution's argument
 
 * Write a program that is given a vector of weights, and a function
 `isReady()` which tells you whether a particular weight should be used,
 randomly chooses a weight in proportion to its size (if it's *ready*)
+
+A: cf. `pickRandomElementFromSubset.cpp`
+
 
 ## Questions that come up as I'm doing this
 
