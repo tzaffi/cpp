@@ -80,3 +80,5 @@ add_executable(addNums leetcode/AddNumbersLL.cpp)
 add_executable(sortedArrayIterator GTraining/SortedArrayIterator.cpp GTraining/Main.cpp)
 
 add_executable(uniformDistribution GTraining/pickRandomElementFromSubset.cpp)
+
+add_executable(binarySearch leetcode/BinarySearch.cpp)
