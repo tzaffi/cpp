@@ -65,17 +65,37 @@ sure to only read one line at a time. However, this leads to as assumption:
 amount of working memory. Unfortunately, the existence of such a line
 would crash the program.
 
-### USAGE
+### Platform Compatibility
+In principle, this should be 100% portable to all major modern platforms
+because I'm only using the C++ standard and Cmake. However, I haven't
+tested it on Windows and you never know when you go over to the Windows world.
+
+### Project files
+These are:
+* Readme.md - an explanation of my approach as well as some other comments and how to compile and run the code
+* sortme.cpp - the all inclusive C++ 11 source code
+* CMakeLists.txt - Cmake file that aids in compilation
+* sFile.txt - A sample file consisting of lots of lines composed of random S's which I used for testing my program
+
+### Compilation (on Linux and Mac)
+Assuming you're okay with having all the files lumped in one place
+do the following inside the directory which you saves the above files:
 ```
-sortme pathToInputFile.txt pathToOutputFile.txt
+cmake .
+make
+```
+
+### USAGE (on Linux and Mac)
+```
+./sortme pathToInputFile.txt pathToOutputFile.txt
 
 # EG:
-sortme veryLarge.txt veryLargeButSorted.txt
+sortme sFile.txt sFileSorted.txt
 ```
 There is also an optional 3rd parameter for specifying working memory:
 ```
 sortme pathToInputFile.txt pathToOutputFile.txt MAX_WORKING_MEMORY
 
 # EG (for 1GB working memory = 1024^3 bytes):
-sortme veryLarge.txt veryLargeButSorted.txt 1073741824
+sortme sFile.txt sFileSorted.txt 1073741824
 ```
