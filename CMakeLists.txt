@@ -93,6 +93,4 @@ add_executable(externalSorting Live25Dec2016/externalSorting.cpp)
 
 add_executable(makeRandomSfile Live25Dec2016/makeRandomSfile.cpp)
 
-add_executable(sortme /Users/zeph/cpp/Live25Dec2016/sortme.cpp)
-
-#add_executable(sortme Live25Dec2016/makeRandomSfile.cpp)
+add_executable(sortme Live25Dec2016/sortme.cpp)
