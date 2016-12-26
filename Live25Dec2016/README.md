@@ -79,7 +79,7 @@ These are:
 
 ### Compilation (on Linux and Mac)
 Assuming you're okay with having all the files lumped in one place
-do the following inside the directory which you saves the above files:
+do the following inside the directory which you saved the above files:
 ```
 cmake .
 make
