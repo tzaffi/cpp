@@ -67,15 +67,15 @@ would crash the program.
 
 ### USAGE
 ```
-sortme pathToInputFile.txt pathToOutputFile.txt
+./sortme pathToInputFile.txt pathToOutputFile.txt
 
 # EG:
-sortme veryLarge.txt veryLargeButSorted.txt
+./sortme veryLarge.txt veryLargeButSorted.txt
 ```
 There is also an optional 3rd parameter for specifying working memory:
 ```
-sortme pathToInputFile.txt pathToOutputFile.txt MAX_WORKING_MEMORY
+./sortme pathToInputFile.txt pathToOutputFile.txt MAX_WORKING_MEMORY
 
 # EG (for 1GB working memory = 1024^3 bytes):
-sortme veryLarge.txt veryLargeButSorted.txt 1073741824
+./sortme veryLarge.txt veryLargeButSorted.txt 1073741824
 ```
