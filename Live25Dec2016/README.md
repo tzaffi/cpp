@@ -94,8 +94,8 @@ sortme sFile.txt sFileSorted.txt
 ```
 There is also an optional 3rd parameter for specifying working memory:
 ```
-sortme pathToInputFile.txt pathToOutputFile.txt MAX_WORKING_MEMORY
+./sortme pathToInputFile.txt pathToOutputFile.txt MAX_WORKING_MEMORY
 
 # EG (for 1GB working memory = 1024^3 bytes):
-sortme sFile.txt sFileSorted.txt 1073741824
+./sortme sFile.txt sFileSorted.txt 1073741824
 ```
