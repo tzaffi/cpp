@@ -28,6 +28,11 @@ to a minimum. Feel free to create temporary files to assist in your efforts.
 Code will be judged based on conciseness, readability, novelty and performance (both memory
 and speed).
 
+## Full Disclosure
+The source code is mostly my own (especially the logic), 
+except for various Stack-Overflow answer
+snippets that related to proper STL and stream operator usage.
+
 ## My Approach
 I was at first tempted to use the fact that the ordering criterion is very
 simple -just count the number of S's. This lead to a possible hybrid bucket
@@ -39,10 +44,14 @@ confident that I could pull it off in the time alotted. So I opted for a simpler
 if less efficient, but more generic approach: external merge sort.
 
 ### Sorting
-Memory is the big problem here. A prodution solution requires investigating
-whether std::sort on a vector, set (whose memory overhead is predictable) or a 
+Memory is the big problem here. A production solution requires investigating
+whether std::sort on a vector, `multi_set` (whose memory overhead is predictable) or a 
 custom memory-capped sorting approach (such as quicksort) are best to use.
 If there were sufficient time, I would use quicksort.
+
+* Note on **uniqueness of lines**: the fact that each line was unique,
+did not allow us to use `set` instead of `multi_set` because
+of the custom comparator whose implied equality would only care of the S content.
 
 ### Assumptions
 The scenario outlined the assumption that the textfile was around 100x the
@@ -55,3 +64,18 @@ sure to only read one line at a time. However, this leads to as assumption:
 * There is no line in the file that whose size is greater than 1/4 of the 
 amount of working memory. Unfortunately, the existence of such a line
 would crash the program.
+
+### USAGE
+```
+sortme pathToInputFile.txt pathToOutputFile.txt
+
+# EG:
+sortme veryLarge.txt veryLargeButSorted.txt
+```
+There is also an optional 3rd parameter for specifying working memory:
+```
+sortme pathToInputFile.txt pathToOutputFile.txt MAX_WORKING_MEMORY
+
+# EG (for 1GB working memory = 1024^3 bytes):
+sortme veryLarge.txt veryLargeButSorted.txt 1073741824
+```
