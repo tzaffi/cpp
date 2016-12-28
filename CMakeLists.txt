@@ -94,3 +94,11 @@ add_executable(externalSorting Live25Dec2016/externalSorting.cpp)
 add_executable(makeRandomSfile Live25Dec2016/makeRandomSfile.cpp)
 
 add_executable(sortme Live25Dec2016/sortme.cpp)
+
+add_executable(hackerRankProblem1 HackerRank/Dec26Problem1.cpp)
+
+add_executable(hackerRankProblem2 HackerRank/Dec26Problem2.cpp)
+
+add_executable(hackerRankProblem3 HackerRank/Dec26Problem3.cpp)
+
+add_executable(hrmlAttribs HackerRank/HRMLattributes.cpp)
