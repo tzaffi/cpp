@@ -102,3 +102,9 @@ add_executable(hackerRankProblem2 HackerRank/Dec26Problem2.cpp)
 add_executable(hackerRankProblem3 HackerRank/Dec26Problem3.cpp)
 
 add_executable(hrmlAttribs HackerRank/HRMLattributes.cpp)
+
+add_executable(sumOfUniformDistributions HackerRank/uniformDistributions.cpp)
+
+add_executable(P1 LikeHackerRank/P1_30Dec2016.cpp)
+add_executable(P2 LikeHackerRank/P2_30Dec2016.cpp)
+add_executable(P3 LikeHackerRank/P3_30Dec2016.cpp)
