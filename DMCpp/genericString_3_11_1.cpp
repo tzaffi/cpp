@@ -3,32 +3,13 @@
 //
 
 #include <iostream>
-#include <sstream>
 #include <vector>
 
+#include "genericString_3_11_1.h"
 /**
 Write a generic function to_string that takes an argmuent of an arbitray type (as const&)
 and generates a string by piping it to std::stringstream and returning the resulting string.
  **/
-
-
-template<typename T>
-std::ostream& operator<< (std::ostream& os, const std::vector<T>& v){
-    os << "[ ";
-    for(auto x: v){
-        os << x << " , ";
-    }
-    os << "]";
-    return os;
-};
-
-template <typename T>
-std::string to_string(const T& x){
-    std::stringstream sstream;
-    sstream << x;
-    return sstream.str();
-}
-
 
 int main(){
     using namespace std;

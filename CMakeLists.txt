@@ -112,3 +112,5 @@ add_executable(P3 LikeHackerRank/P3_30Dec2016.cpp)
 add_executable(UnionFind HackerRank/UnionFind.cpp)
 
 add_executable(genericString DMCpp/genericString_3_11_1.cpp)
+add_executable(variadicToString DMCpp/variadicToTupleString_3_11_2.cpp)
+add_executable(topsortingAndIterator DMCpp/topSortIterator_inspiredBy_3_11_4.cpp)

@@ -1,0 +1,19 @@
+18
+GoRunning Shower
+BrushTeeth Work
+DrinkCoffee Number2
+Number2 GetDressed
+Shoes GoRunning
+Breakfast BrushTeeth
+WakeUp MakeCoffee
+Number1 MakeCoffee
+GetDressed Socks
+WakeUp Number1
+WakeUp BrushTeeth
+Sleep WakeUp
+GoRunning Breakfast
+Socks Shoes
+Number2 GoRunning
+GetDressed GoRunning
+MakeCoffee DrinkCoffee
+Shower Work
