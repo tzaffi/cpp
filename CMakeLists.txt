@@ -95,7 +95,7 @@ add_executable(makeRandomSfile Live25Dec2016/makeRandomSfile.cpp)
 
 add_executable(sortme Live25Dec2016/sortme.cpp)
 
-add_executable(hackerRankProblem1 HackerRank/Dec26Problem1.cpp)
+add_executable(distinctSubstrings HackerRank/DistinctSubstrings.cpp)
 
 add_executable(hackerRankProblem2 HackerRank/Dec26Problem2.cpp)
 
