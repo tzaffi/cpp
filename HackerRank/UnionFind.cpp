@@ -10,7 +10,7 @@
 using namespace std;
 
 struct Borg{
-    Borg(unsigned id) : id(id), population(1) {}
+    Borg(unsigned id) : id(id), population(1), parent(nullptr) {}
 
     Borg* collapseToLeader(){
         if(parent){
@@ -31,6 +31,7 @@ struct Borg{
     //returns the "leader"
     Borg& merge(Borg& other){
         Borg *leader = collapseToLeader(), *otherLeader = other.collapseToLeader();
+        if(leader == otherLeader){ return *leader; }
         if(leader->population >= otherLeader->population){
             otherLeader->parent = leader;
             leader->population += otherLeader->population;
