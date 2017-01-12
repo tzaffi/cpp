@@ -37,8 +37,16 @@ So if N = |s| we have
  * @return
  */
 
+#include <memory>
+
+struct TrieNode{
+    TrieNode(unsigned label) : label(label) {}
+    const unsigned label;
+    vector<pair<string, shared_ptr<TrieNode>>> edges;
+};
+
 struct DistinctSubstrings{
-    DistinctSubstrings(string s) : s(s) {}
+    DistinctSubstrings(string s) : s(s), L(s.size()) {}
 
     unsigned long countBruteForce(){
         unordered_set<string> substrings;
@@ -50,7 +58,7 @@ struct DistinctSubstrings{
         return substrings.size();
     }
 
-    unsigned long longestCommonPrefix(const string& a, const string& b){
+    inline unsigned long longestCommonPrefix(const string& a, const string& b){
         unsigned long lcp = 0;
         while(lcp < a.size() && lcp < b.size() && a[lcp] == b[lcp]){
             lcp++;
@@ -59,7 +67,6 @@ struct DistinctSubstrings{
     }
 
     unsigned long countWithSortedSuffixes(){
-        unsigned long L = s.size();
         set<string> suffixes;
         for(unsigned begin=0; begin < L; ++begin){
             suffixes.insert(s.substr(begin));
@@ -75,8 +82,44 @@ struct DistinctSubstrings{
         return L*(L+1)/2 - dupeCount;
     }
 
+//O(N^2) algorithm
+    void buildSuffixTrieNaively(){
+        //too complicated so abandoned for now
+//        string t = s + '$';
+//        unsigned label = 0;
+//        suffixTrie = shared_ptr<TrieNode>{new TrieNode(label++)};
+//        //not building the path for auxilliary suffix "$":
+//        for(unsigned left=0; left < L; ++left){
+//            string suffix = t.substr(left);
+//            TrieNode currNode = *suffixTrie;
+//            while(suffix.size()) {
+//                string traversalKey = getTraversalKey(suffix , currNode);
+//                if (!traversalKey.size()) {
+//                    currNode.edges.push_back(make_pair(suffix , shared_ptr<TrieNode>{label++}));
+//                    suffix = "";
+//                } else {
+//                    string prefix = longestCommonPrefix(traversalKey, suffix);
+//
+//                }
+//
+//            }
+//        }
+    }
+
 private:
-    string s;
+    const string s;
+    const unsigned long L;
+    shared_ptr<TrieNode> suffixTrie;
+
+    string getTraversalKey (const string& suffix, const TrieNode& node) {
+        char firstLetter = suffix[0];
+        for(const auto& keyPair: node.edges){
+            if(firstLetter == keyPair.first[0]){
+                return keyPair.first;
+            }
+        }
+        return string();
+    }
 };
 
 
