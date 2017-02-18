@@ -68,3 +68,5 @@ add_executable(typeTraits DMCpp/GottschlingRepo/c++11/type_traits_example.cpp)
 add_executable(prefixTrie HackerRank/prefixTrie.cpp)
 add_executable(kinderCandy HackerRank/kindergartenCandy.cpp)
 add_executable(maxStackElement HackerRank/maxStackElement.cpp)
+
+add_executable(htmlRegexp HackerRank/RegExpForHTMLtags.cpp)
