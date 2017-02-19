@@ -70,3 +70,4 @@ add_executable(kinderCandy HackerRank/kindergartenCandy.cpp)
 add_executable(maxStackElement HackerRank/maxStackElement.cpp)
 
 add_executable(htmlRegexp HackerRank/RegExpForHTMLtags.cpp)
+add_executable(pangrams HackerRank/pangrams.cpp)
